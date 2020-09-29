@@ -11,16 +11,12 @@ from phrasehunter.phrase import Phrase
 class Game:
     def __init__(self, **kwargs):
         self.phrases = [
-            "You had me at hello",
-            "You got a friend in me",
-            "May the force be with you",
-            "Just keep swimming",
-            "This is a tasty burger"
+            Phrase("You had me at hello"),
+            Phrase("You got a friend in me"),
+            Phrase("May the force be with you"),
+            Phrase("Just keep swimming"),
+            Phrase("This is a tasty burger")
         ]
-        # self.missed = 0
-        # self.active_phrase = self.get_random_phrase()
-        # self.guesses = []
-        # self.phrase = Phrase(self.active_phrase)
         
         for key, value in kwargs.items():
             setattr(self, key, value)
@@ -30,13 +26,14 @@ class Game:
         self.guesses = []
         self.missed = 0
         self.active_phrase = self.get_random_phrase()
-        self.phrase = Phrase(self.active_phrase)
+        # self.phrase = Phrase(self.active_phrase)
         
         # print(f"{self.active_phrase}\n")
-        self.phrase.display(self.guesses)
+        
+        self.active_phrase.display(self.guesses)
         print("\n")
         
-        while self.missed < 5 and self.phrase.check_complete(self.guesses) == False:
+        while self.missed < 5 and self.active_phrase.check_complete(self.guesses) == False:
             print("Missed Guesses:")
             print(f"{self.missed}\n")
             print("\n")
@@ -49,10 +46,10 @@ class Game:
                 user_guess
             else:
                 user_guess = user_guess.lower()
-                if not self.phrase.check_guess(user_guess):
+                if not self.active_phrase.check_guess(user_guess):
                     self.missed += 1
             self.guesses.append(user_guess)
-            self.phrase.display(self.guesses)
+            self.active_phrase.display(self.guesses)
             print("\n")
         
         self.game_over()
