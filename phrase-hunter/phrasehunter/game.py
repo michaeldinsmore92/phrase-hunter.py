@@ -32,7 +32,7 @@ class Game:
         self.active_phrase = self.get_random_phrase()
         self.phrase = Phrase(self.active_phrase)
         
-        print(f"{self.active_phrase}\n")
+        # print(f"{self.active_phrase}\n")
         self.phrase.display(self.guesses)
         print("\n")
         
